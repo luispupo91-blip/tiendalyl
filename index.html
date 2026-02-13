@@ -13,64 +13,70 @@
             background: linear-gradient(135deg, #1A237E 0%, #3949AB 100%); 
             color: white; 
             text-align: center; 
-            padding: 50px 20px; 
+            padding: 40px 20px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
             position: sticky; 
             top: 0; 
             z-index: 1000; 
         }
-        header h1 { margin: 0; font-size: 2.8em; letter-spacing: 3px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        header p { margin: 10px 0 0; opacity: 0.9; font-size: 1.1em; font-style: italic; }
+        header h1 { margin: 0; font-size: 2.2em; letter-spacing: 2px; text-transform: uppercase; }
+        header p { margin: 10px 0 0; opacity: 0.9; font-size: 1em; font-style: italic; }
 
         /* Contenedor de Productos */
         .contenedor { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
-            padding: 40px 20px; 
+            gap: 20px; 
+            padding: 30px 15px; 
             max-width: 1200px; 
             margin: auto; 
         }
 
-        /* Tarjeta de Producto Premium */
+        /* Tarjeta de Producto */
         .producto-card { 
             background: white; 
-            border-radius: 15px; 
+            border-radius: 12px; 
             overflow: hidden; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
-            border: 1px solid #E0E0E0;
+            border: 1px solid #eee;
         }
-        .producto-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15); 
-        }
-        .producto-card img { width: 100%; height: 260px; object-fit: cover; background: #F8F8F8; }
+        .producto-card:hover { transform: translateY(-5px); }
         
-        .info { padding: 20px; text-align: center; flex-grow: 1; }
-        .nombre { font-size: 1.25em; font-weight: bold; color: #1A237E; margin-bottom: 8px; text-transform: uppercase; }
-        .precio { color: #2E7D32; font-size: 1.5em; font-weight: 800; margin-bottom: 20px; }
+        /* Imagen optimizada para Google Drive */
+        .producto-card img { 
+            width: 100%; 
+            height: 280px; 
+            object-fit: cover; 
+            background: #fdfdfd; 
+            display: block;
+        }
+        
+        .info { padding: 15px; text-align: center; flex-grow: 1; }
+        .nombre { font-size: 1.1em; font-weight: bold; color: #1A237E; margin-bottom: 8px; min-height: 40px; }
+        .precio { color: #2E7D32; font-size: 1.4em; font-weight: 800; margin-bottom: 15px; }
         
         .btn-comprar { 
-            background: linear-gradient(135deg, #1A237E 0%, #3949AB 100%);
+            background: #25d366;
             color: white; 
             text-decoration: none; 
-            padding: 14px; 
-            border-radius: 10px; 
+            padding: 12px; 
+            border-radius: 8px; 
             display: block; 
             font-weight: bold; 
-            box-shadow: 0 4px 8px rgba(26, 35, 126, 0.3);
+            transition: background 0.3s;
         }
+        .btn-comprar:hover { background: #128C7E; }
 
         /* BOTÓN FLOTANTE DE WHATSAPP */
         .wsp-flotante {
             position: fixed;
             width: 60px;
             height: 60px;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             background-color: #25d366;
             color: #FFF;
             border-radius: 50px;
@@ -87,40 +93,32 @@
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* Footer */
-        footer { 
-            background-color: #121212; 
-            color: white; 
-            padding: 50px 20px; 
-            text-align: center; 
-        }
+        footer { background: #1c1e21; color: white; padding: 30px 20px; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-<a href="https://wa.me/5356057878" class="wsp-flotante" target="_blank" title="Contáctanos">
+<a href="https://wa.me/5356057878" class="wsp-flotante" target="_blank">
     <span style="font-weight: bold; font-family: Arial;">W</span>
 </a>
 
 <header>
-    <h1>TIENDA LyL</h1>
+    <h1>Tienda LyL</h1>
     <p>Calidad y Confianza a su Servicio</p>
 </header>
 
 <div class="contenedor" id="catalogo">
-    <p style="text-align: center; grid-column: 1/-1;">Cargando catálogo actualizado...</p>
+    <p style="text-align: center; grid-column: 1/-1;">Cargando productos...</p>
 </div>
 
 <footer>
-    <div style="max-width: 800px; margin: auto;">
-        <h3 style="color: #4CAF50;">Atención al Cliente</h3>
-        <p>Holguín , Cuba. mas de 7 años de experiencia .</p>
-        <p style="opacity: 0.5; font-size: 0.8em; margin-top: 20px;">&copy; 2018-2026 Tienda LyL.</p>
-    </div>
+    <p><strong>Tienda LyL</strong></p>
+    <p>Holguin, Cuba</p>
+    <p style="font-size: 0.8em; opacity: 0.6;">© 2026 Desarrollado para Tienda LyL</p>
 </footer>
 
 <script>
@@ -131,21 +129,28 @@
         try {
             const respuesta = await fetch(URL_CSV);
             const datos = await respuesta.text();
+            // Separar filas y eliminar la cabecera
             const filas = datos.split('\n').slice(1); 
             const contenedor = document.getElementById('catalogo');
             contenedor.innerHTML = '';
 
             filas.forEach(fila => {
+                // Regex para separar por comas ignorando comas dentro de comillas
                 const columnas = fila.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                
                 if (columnas.length >= 3) {
                     const nombre = columnas[0].replace(/"/g, '').trim();
                     const precio = columnas[1].replace(/"/g, '').trim();
                     const imagen = columnas[2].replace(/"/g, '').trim();
 
-                    if(nombre !== "") {
+                    if(nombre !== "" && imagen !== "") {
                         const card = `
                             <div class="producto-card">
-                                <img src="${imagen}" alt="${nombre}" onerror="this.src='https://via.placeholder.com/400x300?text=Cargando...'">
+                                <img src="${imagen}" 
+                                     alt="${nombre}" 
+                                     loading="lazy" 
+                                     referrerpolicy="no-referrer"
+                                     onerror="this.src='https://via.placeholder.com/400x300?text=Imagen+no+disponible'">
                                 <div class="info">
                                     <div class="nombre">${nombre}</div>
                                     <div class="precio">${precio} CUP</div>
@@ -158,9 +163,12 @@
                 }
             });
         } catch (error) {
-            document.getElementById('catalogo').innerHTML = '<p>Error al conectar con el inventario.</p>';
+            console.error(error);
+            document.getElementById('catalogo').innerHTML = '<p style="text-align:center;">Error al cargar el catálogo. Intente de nuevo.</p>';
         }
     }
+
+    // Ejecutar al cargar la página
     cargarProductos();
 </script>
 
