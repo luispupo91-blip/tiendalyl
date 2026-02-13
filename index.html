@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda LyL - Catálogo Online</title>
+    <style>
+        /* Estilo visual similar a tu App (Azul y Blanco) */
+        body { font-family: sans-serif; margin: 0; background-color: #F5F5F5; }
+        header { background-color: #1A237E; color: white; text-align: center; padding: 20px; position: sticky; top: 0; z-index: 100; }
+        .contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .producto-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        .producto-card img { width: 100%; height: 200px; object-fit: cover; background: #EEE; }
+        .info { padding: 15px; text-align: center; }
+        .nombre { font-size: 1.2em; font-weight: bold; color: #1A237E; margin-bottom: 10px; }
+        .precio { color: #4CAF50; font-size: 1.1em; font-weight: bold; margin-bottom: 15px; }
+        .btn-comprar { background-color: #1A237E; color: white; text-decoration: none; padding: 10px; border-radius: 5px; display: block; font-weight: bold; }
+        .btn-comprar:hover { background-color: #000051; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>TIENDA LyL</h1>
+    <p>Calidad a tu alcance</p>
+</header>
+
+<div class="contenedor" id="catalogo">
+    <p style="text-align: center; grid-column: 1/-1;">Cargando productos...</p>
+</div>
+
+<script>
+    // ID de tu Google Sheets ya guardado
+    const EXCEL_ID = '1dq7Hqa2XNOWJb-5idzNdPEoEHGKTPtz1Ds5hZ-iv2UU';
+    const URL_CSV = `https://docs.google.com/spreadsheets/d/${EXCEL_ID}/export?format=csv`;
+
+    async function cargarProductos() {
+        try {
+            const respuesta = await fetch(URL_CSV);
+            const datos = await respuesta.text();
+            const filas = datos.split('\n').slice(1); // Saltar encabezados
+            const contenedor = document.getElementById('catalogo');
+            contenedor.innerHTML = '';
+
+            filas.forEach(fila => {
+                const columnas = fila.split(',');
+                if (columnas.length >= 3) {
+                    const nombre = columnas[0].trim();
+                    const precio = columnas[1].trim();
+                    const imagen = columnas[2].trim();
+
+                    const card = `
+                        <div class="producto-card">
+                            <img src="${imagen}" alt="${nombre}">
+                            <div class="info">
+                                <div class="nombre">${nombre}</div>
+                                <div class="precio">${precio} CUP</div>
+                                <a href="https://wa.me/5356057878?text=Hola%20LyL,%20quiero%20comprar:%20${encodeURIComponent(nombre)}" class="btn-comprar">LO QUIERO</a>
+                            </div>
+                        </div>
+                    `;
+                    contenedor.innerHTML += card;
+                }
+            });
+        } catch (error) {
+            document.getElementById('catalogo').innerHTML = '<p>Error al cargar el catálogo. Revisa tu conexión.</p>';
+        }
+    }
+
+    cargarProductos();
+</script>
+
+</body>
+</html>
